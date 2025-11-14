@@ -2,7 +2,7 @@ import { faEye, faHeart, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Stars from "../Stars";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useRedux from "@/hooks/useRedux";
 import { MyProductType } from "@/types/product.type";
 import ImgEffects from "./ImgEffects";
@@ -54,15 +54,19 @@ const isLiked = data?.find((e) => e.DataOfProduct.id === idItem);
   const heartAnimation = {
     scale: true ? [1.1, 1.8, 1.1] : 1.1,
   };
+  const navigate = useNavigate();
+
 
   return (
-    <motion.div
+    
+            <motion.div
       className="relative h-[380px] w-80 bg-white rounded-2xl shadow-lg overflow-hidden 
                  transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 50 }}
       data-testid="box"
+      onClick={()=> navigate(`/${product.category}/${idItem}`)}
       
     >
       <p className="absolute top-2 left-2 bg-red-600 text-white text-sm font-semibold px-2 py-1 rounded-md z-10">
@@ -96,12 +100,7 @@ const isLiked = data?.find((e) => e.DataOfProduct.id === idItem);
         </motion.p>
       )}
 
-      <Link
-        to={`/${product.category}/${idItem}`}
-        className="absolute right-2 top-10 z-10 cursor-pointer text-gray-600 dark:text-white hover:text-blue-500 transition-all"
-      >
-        <FontAwesomeIcon icon={faEye} size="lg" />
-      </Link>
+    
 
       <ImgEffects product={product} AddTo={AddTo} noButton={noButton} />
 
@@ -123,6 +122,7 @@ const isLiked = data?.find((e) => e.DataOfProduct.id === idItem);
         </div>
       </div>
     </motion.div>
+
   );
 }
 

@@ -19,4 +19,8 @@ const useInsertMassage = () => {
 };
 
 export default useInsertMassage;
+
+
+
+VITE_ai_endpoint
 ``

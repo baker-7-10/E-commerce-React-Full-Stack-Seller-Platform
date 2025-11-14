@@ -55,7 +55,7 @@ function FlachSales() {
           }}
         >
           {Data.map((product) => (
-            <SwiperSlide key={product.id}>
+            <SwiperSlide key={product.id} className=' p-6   '>
               <BoxBroduct product={product} idItem={product.id} />
             </SwiperSlide>
           ))}

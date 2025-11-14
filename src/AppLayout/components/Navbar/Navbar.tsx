@@ -11,12 +11,7 @@ const Navbar = () => {
   return (
     <div className="   h-14  flex   justify-around items-center  fixed top-0 left-0 w-full bg-white shadow  z-[100] ">
       <p className=" sm:text-xl  font-bold   sm:block  hidden">Exclusive</p>
-      <Link
-        to="/AddNewProduct"
-        className="text-white text-center bg-red-600 p-2 rounded-md text-sm text-nowrap md:text-xl lg:text-2xl transition-all duration-300 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50"
-      >
-        Add Product+
-      </Link>
+ 
 
       <nav className="gap-5 hidden   sm:flex md:visible ">
         <NavLink

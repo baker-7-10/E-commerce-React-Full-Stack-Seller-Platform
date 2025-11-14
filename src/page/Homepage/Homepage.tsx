@@ -6,8 +6,10 @@ import BestSellingProducts from './components/BestSellingProducts';
 import MusicBox from './components/MusicBox';
 import ExploreProducts from './components/ExploreProducts';
 import Information from './components/Information';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import SearchBar from './components/SearchBar';
+import ButtonLink from '@/components/Link';
+
 // import { useOnlineUser } from '@/hooks/useOnlineUser';
 function Homepage() {
   return (
@@ -48,6 +50,15 @@ function Homepage() {
         <RandomProduct />
       </div>
       <div className="flex justify-center items-center flex-col gap-[200px]">
+       
+        {/* <Link
+  to="/AddNewProduct"
+  className="fixed bottom-4 rounded-full w-12 h-1 p-8 text-sm  flex justify-center  items-center right-4 text-white bg-red-600  md:text-xl lg:text-2xl transition-all duration-300 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50 z-[10000000]"
+>
+  Add+
+</Link> */}
+
+        <ButtonLink />
         <FlachSales />
         <CategorySales />
         <BestSellingProducts />

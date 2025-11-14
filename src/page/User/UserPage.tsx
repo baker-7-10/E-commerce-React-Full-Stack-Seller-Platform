@@ -5,9 +5,7 @@ import ChartsOverviewDemo from './components/RouteName';
 import useRedux from '@/hooks/useRedux';
 import useUser from '@/hooks/useUser';
 import useProductData from '@/hooks/useUpdateData';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useDrop } from 'react-dnd';
+
 
 
 function UserPage() {
@@ -22,42 +20,12 @@ function UserPage() {
   const userName = user?.name;
 
 
-  const [board , setBoard] = useState<string[]>([])
-
-   const mockItems = [
-    { id: '1', name: 'عنصر 1' },
-    { id: '2', name: 'عنصر 2' },
-    { id: '3', name: 'عنصر 3' },
-  ];
-  
-  
-
-  const handleDrop = (id) => {
-    setBoard((board) => [...board, id]);
-    console.log(board);
-    
-  };
-
-  
-  const [{isOver} ,drop] = useDrop({
-    accept: 'box',
-    drop: (item) => handleDrop(item.id)
-    ,
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
-  })
-  
-
-  
+ 
   return (
     <div className="relative p-6 bg-gray-50 min-h-screen">
-        {/* <UserProfile  id={1}/> */}
 
-<div ref={drop}>
-baker
-</div>
-      {/* <div className="mb-8">
+
+      <div className="mb-8">
         <h1 className="text-3xl sm:text-5xl font-bold text-center text-gray-800">
           My Store
         </h1>
@@ -71,7 +39,7 @@ baker
           Inventory Statistics
         </p>
         <ChartsOverviewDemo userProduct={userProduct} />
-        <UserProfile />
+        {/* <UserProfile /> */}
       </div>
 
       <Link
@@ -90,7 +58,7 @@ baker
             <AddNew product={product} />
           </div>
         ))}
-      </div> */}
+      </div>
         
       
 

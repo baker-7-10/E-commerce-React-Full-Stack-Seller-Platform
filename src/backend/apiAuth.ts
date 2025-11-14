@@ -149,3 +149,5 @@ export async function updateCurrentUser(newRow: {
     throw error;
   }
 }
+
+
