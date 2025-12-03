@@ -7,7 +7,7 @@ const usePostAiJson = () => {
   const { isLoading, mutate } = useMutation({
     mutationFn: (row) => insertMassage(row),
     onSuccess: () => {
-      queryClient.invalidateQueries(['Chats']);
+      queryClient.invalidateQueries(['ai']);
     },
     onError: (err: Error) => {
       alert(err.message);
@@ -18,12 +18,6 @@ const usePostAiJson = () => {
 };
 
 
-// useInsertMassage 
-// mutate({
-//   senderId: "...",
-//   receiverId: "...",
-//   message: "...",
-//   createdAt: new Date().toISOString(),
-// });
+
 
 export default usePostAiJson;

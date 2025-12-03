@@ -125,7 +125,7 @@ function AddNewProduct() {
           type={'number'}
           name={'price'}
           min={0}
-          max={99}
+          max={999999999}
         />
         <Input
           label={'Title'}
@@ -161,7 +161,7 @@ function AddNewProduct() {
           type={'number'}
           name={'piecesRemaining'}
           min={0}
-          max={99}
+          max={100000}
         />
         <Input
           label={'Image'}

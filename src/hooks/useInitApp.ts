@@ -11,10 +11,13 @@ import { fetchProductItem, getBestSellingProducts, getRandomProduct } from '@/st
 import { fetchDataRecommender, getUserId } from '@/store/features/RecommenderSystems/RecommenderSlice';
 import { getProductToWishlist } from '@/store/features/Wishlist/wishlistSlice';
 import { getDataChats, setNewAvatarUser, splitDataChat } from '@/store/features/User/userSlice';
+import  usePostAiJson from '@/backend/usePostAiJson';
+
 
 export default function useInitApp() {
   const { dispatch, appSelector } = useRedux();
   const { user } = useUser();
+  const { mutate } = usePostAiJson();
   const userId = user?.id;
   const { data } = useQuery<MyProductType[]>({
     queryKey: ['DataOfProduct'],
@@ -24,6 +27,8 @@ export default function useInitApp() {
   });
 
   const { Data } = appSelector((state) => state.product);
+// const { BehaviorData } = appSelector((state) => state.RecommendData);
+
 
   const { data: chatData } = useReadChats(userId || '');
 
@@ -57,22 +62,49 @@ export default function useInitApp() {
     }
   }, [Data, chatData, dispatch, userId, ALLUserData]);
 
-  const { BehaviorData } = appSelector((state) => state.RecommendData);
-
+  
+  
+  
+  
+  
 
 
 // useEffect(() => {
-//   const interval = setInterval(() => {
-//     if (BehaviorData.user_id && BehaviorData.category) {
-//       upsertProductFavorite({
-//         userId: BehaviorData.user_id,
-//         Category: BehaviorData.category,
-//       });
-//     }
-//   }, 30000);
 
-//   return () => clearInterval(interval);
+//   console.log('ttestsjbfjsvhvsahve'+ JSON.stringify(BehaviorData));
+  
+//   const interval = setInterval(() => {
+//     mutate({
+//       user_id:BehaviorData.user_id ,
+//       Category: BehaviorData.Category,
+//     });
+//   }, 10000); 
+
+  {
+  // "product_name": "OTC",
+  // "category": "Medicine",
+  // "time_sec": 36,
+  // "rating": 2.5,
+  // "comment": "Good product",
+  // "favorite": false,
+  // "cart": ["mouse", "keyboard"]
+}
+
+
+//   return () => clearInterval(interval); // هاد لازم يكون هنا خارج الـ setInterval
 // }, [BehaviorData]);
+
+
+
+
+  //   if (BehaviorData.user_id && BehaviorData.category) {
+  //     upsertProductFavorite({
+  //       userId: BehaviorData.user_id,
+  //       Category: BehaviorData.category,
+  //     });
+  //   }
+  // }, 30000);
+
 
 
 }

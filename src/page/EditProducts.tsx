@@ -15,6 +15,7 @@ const Gg = () => {
   const { ProductToEdit } = appSelector((state) => state.UserData);
   const  navigate = useNavigate()
 
+console.log(ProductToEdit);
 
   const { register, handleSubmit, reset } = useForm<MyProductType>();
 

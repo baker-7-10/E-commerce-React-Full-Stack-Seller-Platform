@@ -21,7 +21,6 @@ import ProtectedRoute from './ProtectedRoute';
 // const Cart = lazy(() => import('@/APP/store/features/Cart/Cart'));
 // const Wishlist = lazy(() => import('@/APP/store/features/Wishlist/Wishlist'));
 // const MyAccount = lazy(() => import('@/APP/store/features/User/components/MyAccount'));
-// const EditProducts = lazy(() => import('@/APP/store/features/User/components/EditProducts'));
 // const ChatPage = lazy(() => import('@/APP/store/features/User/components/cahtUser/ChatPage'));
 // const MessageNotifications = lazy(() => import('@/APP/store/features/User/components/cahtUser/MessageNotifications'));
 // const AddNewProduct = lazy(() => import('@/APP/store/features/User/components/AddNewProduct'));
@@ -49,6 +48,7 @@ import ViewProductDetails from '@/page/ViewProductDetails/ViewProductDetails';
 import AddNewProduct from '@/page/AddNewProduct';
 import ChatPage from '@/page/cahtUser/ChatPage';
 import Commentpage from '@/page/Comment/Commentpage';
+import EditProducts from '@/page/EditProducts';
 import Error from '@/components/Error/Error';
 
 const stripeUrl = 'pk_test_51QPYMAKxnNgqIQklhBT5FTH7UU1rPPpPP78wG0n7dsGfze107LYUk1WhLbMs5mzZj6DPfYOpRkLQD88UvgZdbD6P00dGYGvcBE';
@@ -92,7 +92,7 @@ const ProtectedRoutes = (
     <Route path="AddNewProduct" element={<AddNewProduct />} />
     <Route path="ChatPage" element={<ChatPage />} />
     <Route path="Commentpage" element={<Commentpage />} />
-    {/* <Route path="Gg" element={<EditProducts />} /> */}
+    <Route path="Gg" element={<EditProducts />} />
     <Route path="*" element={<Error />} />
   </Route>
 );
