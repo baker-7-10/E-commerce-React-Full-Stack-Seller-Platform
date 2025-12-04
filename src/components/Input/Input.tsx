@@ -13,8 +13,8 @@ const Input = ({
   additionalClasses = '',
   labelStyle = false,
 }: InputProps) => {
-  const style1 = `w-full px-3 py-3 rounded-md border border-gray-300 bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-200 transition-shadow duration-300 ease-in-out ${additionalClasses}`;
-  const style2 = `rounded-md h-10 px-3 border border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-shadow duration-300 ease-in-out`;
+  const style1 : string = `w-full px-3 py-3 rounded-md border border-gray-300 bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-200 transition-shadow duration-300 ease-in-out ${additionalClasses}`;
+  const style2 : string = `rounded-md h-10 px-3 border border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-shadow duration-300 ease-in-out`;
   return (
     <div className="flex flex-col gap-2">
       {label && (
