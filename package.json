@@ -44,6 +44,7 @@
     "agora-rtc-sdk-ng": "^4.22.2",
     "axios": "^1.7.2",
     "framer-motion": "^11.2.12",
+    "lucide-react": "^0.555.0",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
