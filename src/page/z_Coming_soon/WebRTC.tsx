@@ -10,7 +10,7 @@ interface Signal {
   candidate?: any;
 }
 
-const WebRTCChat = ({ userId, peerId }: { userId: string; peerId: string }) => {
+const WebRTCChat = ({ userId = '9163ab9d-7979-4ce0-805e-b7d4aa19aeab', peerId = 'd400d6fc-9be9-4e07-8f84-dd0a4271f1ef' }: { userId: string; peerId: string }) => {
   const localAudioRef = useRef<HTMLAudioElement>(null);
   const remoteAudioRef = useRef<HTMLAudioElement>(null);
   const pcRef = useRef<RTCPeerConnection | null>(null);
