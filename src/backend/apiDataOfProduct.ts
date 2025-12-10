@@ -35,16 +35,30 @@ export async function insertNewProduct(newRow: { image: File })  {
   return data;
 }
 export async function deleteProduct(id: string) {
+  // حذف الـ favorites أولاً
+  const { error: favError } = await supabase
+    .from('ProductFavorite')
+    .delete()
+    .eq('product_id', id);
+
+  if (favError) {
+    console.error('Error deleting favorites:', favError);
+    throw new Error('Cannot delete favorites before deleting product');
+  }
+
+  // بعدها نحذف المنتج نفسه
   const { data, error } = await supabase
     .from('DataOfProduct')
     .delete()
     .eq('id', id);
+
   if (error) {
     console.error(error);
-    throw new Error('bakeroooooerrerer');
+    throw new Error('Error deleting product');
   }
   return data;
 }
+
 
 export async function updateProduct(newData: {
   id: string;

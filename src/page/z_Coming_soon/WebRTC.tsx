@@ -1,47 +1,122 @@
-import React, { useEffect, useState } from 'react';
+import supabase from '@/backend/supabase';
+import React, { useEffect, useRef, useState } from 'react';
 
-const WebRTC = () => {
-  const [audioStream, setAudioStream] = useState<MediaStream | null>(null);
-  const [isStreaming, setIsStreaming] = useState<boolean>(false);
+interface Signal {
+  id?: number;
+  sender: string;
+  receiver: string;
+  type: 'offer' | 'answer' | 'ice';
+  sdp?: any;
+  candidate?: any;
+}
 
-  const openMicrophone = async () => {
-    const constraints = {
-      audio: { echoCancellation: true, noiseSuppression: true },
+const WebRTCChat = ({ userId, peerId }: { userId: string; peerId: string }) => {
+  const localAudioRef = useRef<HTMLAudioElement>(null);
+  const remoteAudioRef = useRef<HTMLAudioElement>(null);
+  const pcRef = useRef<RTCPeerConnection | null>(null);
+  const [isStreaming, setIsStreaming] = useState(false);
+
+  const startCall = async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    localAudioRef.current!.srcObject = stream;
+
+    const pc = new RTCPeerConnection({
+      iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+    });
+    pcRef.current = pc;
+
+    // إضافة المسارات المحلية
+    stream.getTracks().forEach(track => pc.addTrack(track, stream));
+
+    // استقبال الصوت البعيد
+    pc.ontrack = (event) => {
+      remoteAudioRef.current!.srcObject = event.streams[0];
     };
 
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      setAudioStream(stream);
-      setIsStreaming(true);
-    } catch (error: any) {
-      console.error('Error accessing microphone:', error.name, error.message);
-    }
+    // إرسال ICE candidates عبر Supabase
+    pc.onicecandidate = (event) => {
+      if (event.candidate) {
+        supabase.from('AudioSignals').insert({
+          sender: userId,
+          receiver: peerId,
+          type: 'ice',
+          candidate: event.candidate,
+        } as Signal);
+      }
+    };
+
+    // إنشاء offer
+    const offer = await pc.createOffer();
+    await pc.setLocalDescription(offer);
+
+    await supabase.from('AudioSignals').insert({
+      sender: userId,
+      receiver: peerId,
+      type: 'offer',
+      sdp: offer,
+    } as Signal);
+
+    setIsStreaming(true);
   };
 
-  const stopMicrophone = () => {
-    if (audioStream) {
-      audioStream.getTracks().forEach((track) => track.stop());
-      setAudioStream(null);
-      setIsStreaming(false);
-    }
+  const stopCall = () => {
+    pcRef.current?.close();
+    pcRef.current = null;
+    setIsStreaming(false);
   };
+
+  // استقبال الإشارات من Supabase
+  useEffect(() => {
+    const channel = supabase
+      .channel('audio-signaling')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'AudioSignals' }, async payload => {
+        const signal = payload.new as Signal;
+
+        if (signal.receiver !== userId || !pcRef.current) return;
+
+        const pc = pcRef.current;
+
+        if (signal.type === 'offer') {
+          await pc.setRemoteDescription(signal.sdp);
+          const answer = await pc.createAnswer();
+          await pc.setLocalDescription(answer);
+
+          await supabase.from('AudioSignals').insert({
+            sender: userId,
+            receiver: signal.sender,
+            type: 'answer',
+            sdp: answer,
+          } as Signal);
+        }
+
+        if (signal.type === 'answer') {
+          await pc.setRemoteDescription(signal.sdp);
+        }
+
+        if (signal.type === 'ice' && signal.candidate) {
+          await pc.addIceCandidate(signal.candidate);
+        }
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [userId]);
 
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold mb-4">الدردشة الصوتية</h2>
 
+      <audio ref={localAudioRef} autoPlay muted />
+      <audio ref={remoteAudioRef} autoPlay />
+
       {!isStreaming ? (
-        <button
-          onClick={openMicrophone}
-          className="mt-2 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-        >
+        <button onClick={startCall} className="mt-2 bg-green-500 text-white py-2 px-4 rounded">
           بدء الدردشة الصوتية
         </button>
       ) : (
-        <button
-          onClick={stopMicrophone}
-          className="mt-2 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
-        >
+        <button onClick={stopCall} className="mt-2 bg-red-500 text-white py-2 px-4 rounded">
           إيقاف الدردشة الصوتية
         </button>
       )}
@@ -49,4 +124,4 @@ const WebRTC = () => {
   );
 };
 
-export default WebRTC;
+export default WebRTCChat;

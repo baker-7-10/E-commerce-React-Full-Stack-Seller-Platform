@@ -6,6 +6,8 @@ function CartTotal() {
   const { appSelector } = useRedux();
 
   const { totalPrice } = appSelector((state) => state.cartItem);
+  
+  
 
   return (
     <div className=" flex    items-center gap-10 mt-24  flex-col  sm:flex-row sm:justify-around">

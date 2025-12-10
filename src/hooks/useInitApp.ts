@@ -5,7 +5,7 @@ import useUser from './useUser';
 import useReadChats from './useReadChats';
 import usePublicUser from './usePublicUser';
 import { getDataOfProduct } from '@/backend/apiDataOfProduct';
-
+import axios from "axios";
 import { MyProductType } from '@/types/product.type';
 import { fetchProductItem, getBestSellingProducts, getRandomProduct } from '@/store/features/Homepage/HomepageSlice';
 import { fetchDataRecommender, getUserId } from '@/store/features/RecommenderSystems/RecommenderSlice';
@@ -27,7 +27,6 @@ export default function useInitApp() {
   });
 
   const { Data } = appSelector((state) => state.product);
-// const { BehaviorData } = appSelector((state) => state.RecommendData);
 
 
   const { data: chatData } = useReadChats(userId || '');
@@ -66,45 +65,27 @@ export default function useInitApp() {
   
   
   
-  
+  const { BehaviorData } = appSelector((state) => state.RecommendData);
+  useEffect(() => {
+    // دالة الإرسال
+    const sendData = async () => {
+      try {
+        await axios.post("http://127.0.0.1:8000/calculate_interest", BehaviorData);
+        console.log("BehaviorData sent successfully");
+      } catch (err) {
+        console.error("Error sending BehaviorData:", err);
+      }
+    };
 
+    // أول إرسال عند الماونت مباشرة
+    sendData();
 
-// useEffect(() => {
+    // كل 60 ثانية
+    const interval = setInterval(() => {
+      sendData();
+    }, 60000); // 60000 ms = 1 دقيقة
 
-//   console.log('ttestsjbfjsvhvsahve'+ JSON.stringify(BehaviorData));
-  
-//   const interval = setInterval(() => {
-//     mutate({
-//       user_id:BehaviorData.user_id ,
-//       Category: BehaviorData.Category,
-//     });
-//   }, 10000); 
-
-  {
-  // "product_name": "OTC",
-  // "category": "Medicine",
-  // "time_sec": 36,
-  // "rating": 2.5,
-  // "comment": "Good product",
-  // "favorite": false,
-  // "cart": ["mouse", "keyboard"]
-}
-
-
-//   return () => clearInterval(interval); // هاد لازم يكون هنا خارج الـ setInterval
-// }, [BehaviorData]);
-
-
-
-
-  //   if (BehaviorData.user_id && BehaviorData.category) {
-  //     upsertProductFavorite({
-  //       userId: BehaviorData.user_id,
-  //       Category: BehaviorData.category,
-  //     });
-  //   }
-  // }, 30000);
-
-
-
+    // تنظيف عند إزالة المكون
+    return () => clearInterval(interval);
+  }, [BehaviorData]); // لو تغير BehaviorData رح يعيد التشغيل
 }

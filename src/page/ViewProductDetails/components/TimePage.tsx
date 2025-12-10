@@ -28,7 +28,7 @@ const TimePage = ({
         timeSpent: timeElapsed,
         productId: dataItime.id,
         Category: dataItime.category,
-        productsLiked
+        product_name:dataItime.title
       }));  
     };
 

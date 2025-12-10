@@ -42,7 +42,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/react-redux": "^7.1.34",
     "agora-rtc-sdk-ng": "^4.22.2",
-    "axios": "^1.7.2",
+    "axios": "^1.13.2",
     "framer-motion": "^11.2.12",
     "lucide-react": "^0.555.0",
     "react": "^18.2.0",
