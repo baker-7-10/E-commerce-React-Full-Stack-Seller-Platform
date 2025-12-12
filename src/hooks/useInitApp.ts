@@ -88,4 +88,29 @@ export default function useInitApp() {
     // تنظيف عند إزالة المكون
     return () => clearInterval(interval);
   }, [BehaviorData]); // لو تغير BehaviorData رح يعيد التشغيل
+  
+  
+  // useEffect(() => {
+  //   const sendData = async () => {
+  //     let res;
+  //     try {
+  //       res =await axios.get("http://127.0.0.1:8000/ai");
+  //       console.log("BehaviorData sent successfully");
+
+  //     } catch (err) {
+  //       console.error("Error sending BehaviorData:", err);
+  //     }
+  //   };
+
+  //   sendData();
+
+  //   const interval = setInterval(() => {
+  //     sendData();
+  //   }, 60000); // 60000 ms = 1 دقيقة
+
+  //   return () => clearInterval(interval);
+  // }, []); 
+
+
+
 }
