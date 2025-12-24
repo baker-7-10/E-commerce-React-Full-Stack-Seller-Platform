@@ -7,11 +7,12 @@ import usePublicUser from './usePublicUser';
 import { getDataOfProduct } from '@/backend/apiDataOfProduct';
 import axios from "axios";
 import { MyProductType } from '@/types/product.type';
-import { fetchProductItem, getBestSellingProducts, getRandomProduct } from '@/store/features/Homepage/HomepageSlice';
+import { fetchProductItem, getBestSellingProducts, getRandomProduct, getRecommendationss  } from '@/store/features/Homepage/HomepageSlice';
 import { fetchDataRecommender, getUserId } from '@/store/features/RecommenderSystems/RecommenderSlice';
 import { getProductToWishlist } from '@/store/features/Wishlist/wishlistSlice';
 import { getDataChats, setNewAvatarUser, splitDataChat } from '@/store/features/User/userSlice';
 import  usePostAiJson from '@/backend/usePostAiJson';
+import { useRecommendations } from './use-ecommendations';
 
 
 export default function useInitApp() {
@@ -19,6 +20,7 @@ export default function useInitApp() {
   const { user } = useUser();
   const { mutate } = usePostAiJson();
   const userId = user?.id;
+
   const { data } = useQuery<MyProductType[]>({
     queryKey: ['DataOfProduct'],
     queryFn: getDataOfProduct,
@@ -33,6 +35,16 @@ export default function useInitApp() {
 
   const { data: ALLUserData } = usePublicUser();
 
+    const {
+    data: recommendations,
+    isLoading,
+    isError,
+  } = useRecommendations(userId);
+  console.log(userId);
+  console.log(recommendations);
+  
+
+
   const updateData = useCallback(() => {
     if (data) {
       const updatedData = data.map((item: MyProductType) => ({
@@ -40,6 +52,7 @@ export default function useInitApp() {
         quantity: 1,
       }));
       dispatch(fetchProductItem(updatedData));
+
       dispatch(fetchDataRecommender(updatedData));
 
     }
@@ -50,7 +63,7 @@ export default function useInitApp() {
   }, [updateData]);
 
   useEffect(() => {
-    if (Data && chatData && userId && ALLUserData) {
+    if (Data && chatData && userId && ALLUserData && recommendations) {
       dispatch(getRandomProduct());
       dispatch(getBestSellingProducts());
       dispatch(getProductToWishlist(Data));
@@ -58,11 +71,16 @@ export default function useInitApp() {
       dispatch(setNewAvatarUser(ALLUserData));
       dispatch(splitDataChat(userId));      
       dispatch(getUserId(userId));      
+
     }
-  }, [Data, chatData, dispatch, userId, ALLUserData]);
+  }, [Data, chatData, dispatch, userId, ALLUserData , recommendations]);
 
   
-  
+    useEffect(() => {
+    if (recommendations) {   
+      dispatch(getRecommendationss(recommendations));
+    }
+  }, [recommendations]);
   
   
   const { BehaviorData } = appSelector((state) => state.RecommendData);
@@ -88,29 +106,4 @@ export default function useInitApp() {
     // تنظيف عند إزالة المكون
     return () => clearInterval(interval);
   }, [BehaviorData]); // لو تغير BehaviorData رح يعيد التشغيل
-  
-  
-  // useEffect(() => {
-  //   const sendData = async () => {
-  //     let res;
-  //     try {
-  //       res =await axios.get("http://127.0.0.1:8000/ai");
-  //       console.log("BehaviorData sent successfully");
-
-  //     } catch (err) {
-  //       console.error("Error sending BehaviorData:", err);
-  //     }
-  //   };
-
-  //   sendData();
-
-  //   const interval = setInterval(() => {
-  //     sendData();
-  //   }, 60000); // 60000 ms = 1 دقيقة
-
-  //   return () => clearInterval(interval);
-  // }, []); 
-
-
-
 }

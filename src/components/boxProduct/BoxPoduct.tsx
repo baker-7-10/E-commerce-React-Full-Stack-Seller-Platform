@@ -7,7 +7,8 @@ import useUser from "@/hooks/useUser";
 import usefetchFavorites from "@/hooks/usefetchFavorites";
 import { deleteFromWishList } from "@/store/features/Wishlist/wishlistSlice";
 import useWishlistAndCart from "@/hooks/useWishlistAndCart";
-import { FaHeart, FaShoppingCart, FaStar } from "react-icons/fa";
+import { FaEye, FaFire, FaHeart, FaShoppingCart, FaStar, FaTag } from "react-icons/fa";
+import { useState } from "react";
 
 interface BoxProductProps {
   product: MyProductType;
@@ -39,136 +40,181 @@ function BoxProduct({
     product.price +
     product.price * (product.discount / 100)
   ).toFixed(0);
-
+  const [isHovered, setIsHovered] = useState(false);
   const handleAddToFavorite = () =>
     mutate({ userId: user.id, productId: idItem });
 
   const handleDelete = () => dispatch(deleteFromWishList(idItem));
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+   <div
       onClick={() => navigate(`/${product.category}/${idItem}`)}
-      className="group relative w-64 bg-white dark:bg-gray-900 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative w-80 bg-white dark:bg-gray-900 rounded-3xl overflow-hidden cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-500"
+      style={{
+        transform: isHovered ? 'translateY(-12px) scale(1.02)' : 'translateY(0) scale(1)',
+      }}
     >
-      {/* Hover BG */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-      {/* Discount Badge */}
-      <motion.div
-        initial={{ x: -50 }}
-        animate={{ x: 0 }}
-        className="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full z-20 shadow-md"
-      >
-        -{product.discount}%
-      </motion.div>
-
-      {/* Heart Button */}
-      <motion.button
-        whileHover={{ scale: 1.12 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={(e) => {
-          e.stopPropagation();
-          handleAddToFavorite();
-        }}
-        className="absolute top-4 right-4 z-20 bg-white dark:bg-gray-800 rounded-full p-2.5 shadow-md hover:shadow-lg transition-all"
-      >
-        <motion.div
-          animate={{ scale: isLiked ? [1, 1.3, 1] : 1 }}
-          transition={{ duration: 0.3 }}
+      {/* Header Bar */}
+      <div className="relative h-16 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-between px-6">
+        <div className="flex items-center gap-2">
+          <FaFire className="text-yellow-300 animate-pulse" size={20} />
+          <span className="text-white font-bold text-sm uppercase tracking-widest">Hot Deal</span>
+        </div>
+        
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleAddToFavorite();
+          }}
+          className="bg-white/20 backdrop-blur-sm rounded-full p-2 hover:bg-white/30 transition-all duration-300"
         >
           <FaHeart
-            size={20}
-            className={`transition-all ${
-              isLiked
-                ? "fill-red-500 text-red-500"
-                : "text-gray-400 hover:text-red-500"
+            size={18}
+            className={`transition-all duration-300 ${
+              isLiked ? "fill-red-400 text-red-400 scale-110" : "text-white"
             }`}
           />
-        </motion.div>
-      </motion.button>
-
-      {/* Image Container */}
-      <div className="relative w-full h-72 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center overflow-hidden">
-        {/* Blur Decorations */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-200 rounded-full mix-blend-multiply filter blur-2xl opacity-20" />
-          <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-200 rounded-full mix-blend-multiply filter blur-2xl opacity-20" />
-        </div>
-
-        <motion.img
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.4 }}
-          src={product.image}
-          alt={product.title}
-          className="w-48 h-48 object-cover relative z-10"
-        />
-
-        {/* Hover Overlay */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="absolute inset-0 bg-black/40 flex items-center justify-center z-10 backdrop-blur-sm"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={(e) => {
-              e.stopPropagation();
-              // Add-to-cart logic here
-            }}
-            className="bg-white text-black rounded-full px-6 py-3 font-semibold flex items-center gap-2 shadow-lg hover:bg-gray-100 transition-all"
-          >
-            <FaShoppingCart size={18} />
-            Add to Cart
-          </motion.button>
-        </motion.div>
+        </button>
       </div>
 
-      {/* Content */}
-      <div className="relative p-5 space-y-3">
+      {/* Discount Corner Badge */}
+      <div className="absolute top-12 right-0 z-30">
+        <div className="relative">
+          <div className="bg-gradient-to-br from-red-500 to-red-700 text-white px-6 py-3 rounded-l-2xl shadow-2xl">
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-black leading-none">-{product.discount}%</span>
+              <span className="text-[10px] font-semibold uppercase">OFF</span>
+            </div>
+          </div>
+          <div className="absolute -bottom-2 right-0 w-0 h-0 border-t-[8px] border-t-red-900 border-l-[8px] border-l-transparent"></div>
+        </div>
+      </div>
+
+      {/* Product Image Section */}
+      <div className="relative h-72 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center p-8">
+        {/* Decorative Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-purple-400/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <img
+          src={product.image}
+          alt={product.title}
+          className="w-52 h-52 object-contain relative z-10 transition-all duration-700"
+          style={{
+            transform: isHovered ? 'scale(1.2) translateY(-10px)' : 'scale(1)',
+            filter: isHovered ? 'drop-shadow(0 25px 35px rgba(0,0,0,0.25))' : 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))'
+          }}
+        />
+
+        {/* Quick Actions Overlay */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col items-center justify-end pb-8 gap-3 transition-all duration-500"
+          style={{ 
+            opacity: isHovered ? 1 : 0,
+            pointerEvents: isHovered ? 'auto' : 'none'
+          }}
+        >
+          <button
+            // onClick={handleAddToCart}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl px-10 py-4 font-bold flex items-center gap-3 shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <FaShoppingCart size={22} />
+            <span className="text-lg">Add to Cart</span>
+          </button>
+          
+          <button
+            onClick={(e) => e.stopPropagation()}
+            className="text-white text-sm font-semibold underline hover:text-blue-300 transition-colors"
+          >
+            Quick View
+          </button>
+        </div>
+      </div>
+
+      {/* Product Info Section */}
+      <div className="p-6 space-y-4">
+        {/* Category & Stock */}
+        <div className="flex items-center justify-between">
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/30 px-3 py-1.5 rounded-full uppercase">
+            <FaTag size={10} />
+            {product.category}
+          </span>
+          <span className="text-xs font-semibold text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/30 px-3 py-1.5 rounded-full">
+            In Stock
+          </span>
+        </div>
+
         {/* Title */}
-        <h3 className="font-semibold text-lg text-gray-900 dark:text-white line-clamp-2 group-hover:text-blue-600 transition-colors">
+        <h3 className="font-extrabold text-xl text-gray-900 dark:text-white line-clamp-2 leading-tight min-h-[3.5rem] group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
           {product.title}
         </h3>
 
-        {/* Rating */}
-        <div className="flex items-center gap-2">
+        {/* Rating & Reviews */}
+        <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
           <div className="flex gap-1">
             {[...Array(5)].map((_, i) => (
               <FaStar
                 key={i}
-                size={14}
+                size={16}
                 className={
                   i < Math.round(product.rating.rate)
-                    ? "fill-yellow-400 text-yellow-400"
-                    : "text-gray-300"
+                    ? "fill-amber-500 text-amber-500"
+                    : "text-gray-300 dark:text-gray-600"
                 }
               />
             ))}
           </div>
-          <span className="text-xs text-gray-500">
-            ({product.rating.count})
+          <span className="text-sm font-bold text-gray-700 dark:text-gray-300">
+            {product.rating.rate}
+          </span>
+          <span className="text-xs text-gray-500 dark:text-gray-500">
+            ({product.rating.count} Reviews)
           </span>
         </div>
 
-        {/* Price */}
-        <div className="flex items-baseline gap-3 pt-2 border-t border-gray-200 dark:border-gray-700">
-          <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
-            ${product.price}
-          </span>
-          <span className="text-sm text-gray-400 line-through font-medium">
-            ${originalPrice}
-          </span>
+        {/* Price Section */}
+        <div className="space-y-3">
+          <div className="flex items-end justify-between">
+            <div className="space-y-1">
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Current Price</p>
+              <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+                ${product.price}
+              </p>
+            </div>
+            
+            <div className="text-right space-y-1">
+              <p className="text-xs text-gray-500 dark:text-gray-400 line-through">
+                Was ${originalPrice}
+              </p>
+              <p className="text-sm font-bold text-green-600 dark:text-green-400">
+                Save $
+              </p>
+            </div>
+          </div>
+
+          {/* Progress Bar - Limited Stock Indicator */}
+          <div className="space-y-1.5">
+            <div className="flex justify-between text-xs">
+              <span className="text-orange-600 dark:text-orange-400 font-semibold">Almost Sold Out!</span>
+              <span className="text-gray-600 dark:text-gray-400">78% sold</span>
+            </div>
+            <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-orange-500 to-red-500 rounded-full transition-all duration-1000"
+                style={{ width: isHovered ? '78%' : '0%' }}
+              ></div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Bottom Accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-    </motion.div>
+      <div className="h-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"></div>
+    </div>
   );
 }
 

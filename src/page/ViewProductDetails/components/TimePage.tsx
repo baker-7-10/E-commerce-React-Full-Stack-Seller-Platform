@@ -39,9 +39,8 @@ const TimePage = ({
     };
   }, []);
   return (
-    <div className="p-4">
-      <h2 className="text-lg font-semibold">مرحبًا بك في هذه الصفحة</h2>
-      <p>سيتم حساب الوقت الذي تقضيه هنا!</p>
+    <div className="">
+      
     </div>
   );
 };

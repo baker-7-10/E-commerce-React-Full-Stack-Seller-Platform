@@ -97,7 +97,7 @@ const Details = ({
       <hr />
 
       <div className=" flex gap-3  items-center ">
-        <label>Colors:</label>
+        <label>Color :</label>
         <div className="flex gap-1 ">
           <p
             style={{
@@ -108,15 +108,7 @@ const Details = ({
               cursor: 'pointer',
             }}
           ></p>
-          <p
-            style={{
-              width: '15px',
-              height: '15px',
-              borderRadius: '50%',
-              backgroundColor: ProductDetails.color.color2,
-              cursor: 'pointer',
-            }}
-          ></p>
+         
         </div>
       </div>
       <div className=" flex gap-3  items-center ">
