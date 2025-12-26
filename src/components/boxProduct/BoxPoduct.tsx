@@ -38,7 +38,7 @@ function BoxProduct({
   // Original price fixed
   const originalPrice = (
     product.price +
-    product.price * (product.discount / 100)
+    product.price * (20 / 100)
   ).toFixed(0);
   const [isHovered, setIsHovered] = useState(false);
   const handleAddToFavorite = () =>
@@ -84,11 +84,11 @@ function BoxProduct({
         <div className="relative">
           <div className="bg-gradient-to-br from-red-500 to-red-700 text-white px-6 py-3 rounded-l-2xl shadow-2xl">
             <div className="flex flex-col items-center">
-              <span className="text-3xl font-black leading-none">-{product.discount}%</span>
+              <span className="text-3xl font-black leading-none">-20%</span>
               <span className="text-[10px] font-semibold uppercase">OFF</span>
             </div>
           </div>
-          <div className="absolute -bottom-2 right-0 w-0 h-0 border-t-[8px] border-t-red-900 border-l-[8px] border-l-transparent"></div>
+          <div className="absolute -bottom-2 right-0 w-0 h-0 borddiscounter-t-[8px] border-t-red-900 border-l-[8px] border-l-transparent"></div>
         </div>
       </div>
 

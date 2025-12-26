@@ -38,12 +38,12 @@ function Homepage() {
           >
             About
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="SignUp"
             className="border-current border-zinc-500  p-2 p-b-4  h-10  "
           >
             Sign Up
-          </NavLink>
+          </NavLink> */}
         </div>
         <Sidebar />
         <SearchBar />

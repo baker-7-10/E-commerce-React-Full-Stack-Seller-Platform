@@ -12,7 +12,7 @@ function BestSellingProducts() {
       title="Best Selling Products"
       viewBecause="This Month"
       noButton={false}
-      buttonText="View All"
+      buttonText=""
     >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {BestSellingProducts.slice(0, 3).map((data) => (

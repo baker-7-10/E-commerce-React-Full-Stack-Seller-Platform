@@ -22,7 +22,6 @@ const TimePage = ({
     const handleBeforeUnload = () => {
       const timeElapsed = Math.floor((Date.now() - startTime) / 1000); 
       setTimeSpent(timeElapsed);
-      console.log(`لقد قضيت ${timeElapsed} ثانية هنا!`);
       if (timeElapsed < 1) return;
       dispatch(getDataToRecommend({
         timeSpent: timeElapsed,

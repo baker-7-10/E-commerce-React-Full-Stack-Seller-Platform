@@ -14,7 +14,7 @@ function ExploreProducts() {
       noButton={false}
       buttonText="View All Products"
     >
-      <div className="flex    flex-row  flex-wrap  gap-16  h-[850px]  overflow-hidden  justify-center items-center   ">
+      <div className="flex    flex-row  flex-wrap  gap-16  h-[650px]  overflow-hidden  justify-center items-center   ">
         {Data.map((data) => (
           <div key={data.id} className="">
             <BoxBroduct product={data} idItem={data.id} />

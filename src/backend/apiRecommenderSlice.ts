@@ -24,7 +24,6 @@ export async function upsertProductFavorite({
 
   if (existing) {
    
-    // ✅ موجود بالفعل، نحدثه (مثلاً تحديث تاريخ أو أي شيء آخر)
     const { error: updateError } = await supabase
       .from("Recommended-data")
       .update({
@@ -37,9 +36,7 @@ export async function upsertProductFavorite({
       throw new Error("Error updating existing favorite");
     }
 
-    console.log("Product favorite updated.");
   } else {
-    // ❌ مش موجود، نضيفه جديد
     const { error: insertError } = await supabase
       .from("Recommended-data")
       .insert([{ user_id: userId, Category }]);
@@ -49,6 +46,5 @@ export async function upsertProductFavorite({
       throw new Error("Error inserting new favorite");
     }
 
-    console.log("Product favorite inserted.");
   }
 }

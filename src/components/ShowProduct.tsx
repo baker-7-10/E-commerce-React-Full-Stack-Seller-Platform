@@ -36,11 +36,11 @@ function ShowProduct({
       <div className=" relative flex justify-center items-center bg-slate-70 ">
         {children}
       </div>
-      <div className="flex justify-center items-center  m-8">
+      {/* <div className="flex justify-center items-center  m-8">
         {noButton || (
           <button className="  bg-red-600 p-2 text-white ">{buttonText}</button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

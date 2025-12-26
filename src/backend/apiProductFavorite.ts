@@ -27,7 +27,6 @@ export async function insertProductFavorite({ userId, productId }: { userId: str
       throw new Error('Error removing product from favorites');
     }
 
-    console.log('Product removed from favorites:', data);
     return data; 
   } else {
     const { data, error } = await supabase
@@ -41,7 +40,6 @@ export async function insertProductFavorite({ userId, productId }: { userId: str
       throw new Error('Error inserting new product');
     }
 
-    console.log('Product added to favorites:', data);
     return data;
   }
 }

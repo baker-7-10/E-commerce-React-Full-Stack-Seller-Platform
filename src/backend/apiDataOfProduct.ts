@@ -64,7 +64,6 @@ export async function updateProduct(newData: {
   id: string;
   EditRow: Partial<MyProductType>;
 }) {
-  console.log(newData);
 
   const { data, error } = await supabase
     .from('DataOfProduct')

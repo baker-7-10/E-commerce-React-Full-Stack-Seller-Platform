@@ -69,12 +69,12 @@ function SignUp() {
           >
             Create Account
           </button>
-          <button
+          {/* <button
             disabled={isLoading}
             className=" p-1 rounded-sm  border-[1px]  "
           >
             Sign up with Google
-          </button>
+          </button> */}
           <p>
             Already have account? <Link to="/LogIn">Log in</Link>
           </p>

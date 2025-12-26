@@ -77,15 +77,15 @@ export default function Navbar() {
               <NavLink to="/" className="hover:text-blue-600">Home</NavLink>
               <NavLink to="/Contact" className="hover:text-blue-600">Contact</NavLink>
               <NavLink to="/About" className="hover:text-blue-600">About</NavLink>
-              <NavLink to="/SignUp" className="hover:text-blue-600">Sign Up</NavLink>
+              {/* <NavLink to="/SignUp" className="hover:text-blue-600">Sign Up</NavLink> */}
             </Box>
 
             {/* Icons */}
-            <Box className="flex gap-6 items-center">
+            <Box className="flex  flex-row-reverse  gap-6 items-center">
               <UserIcon />
               <CartIcon />
               <Like />
-              <Basket />
+              {/* <Basket /> */}
               <MessagesIcon />
 
               {/* Mobile Menu Button */}
@@ -120,9 +120,7 @@ export default function Navbar() {
             <NavLink to="/About" className="text-lg" onClick={() => setIsOpen(false)}>
               About
             </NavLink>
-            <NavLink to="/SignUp" className="text-lg" onClick={() => setIsOpen(false)}>
-              Sign Up
-            </NavLink>
+           
           </Box>
         </Box>
       </Drawer>

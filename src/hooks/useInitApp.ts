@@ -40,9 +40,7 @@ export default function useInitApp() {
     isLoading,
     isError,
   } = useRecommendations(userId);
-  console.log(userId);
-  console.log(recommendations);
-  
+
 
 
   const updateData = useCallback(() => {
@@ -83,27 +81,48 @@ export default function useInitApp() {
   }, [recommendations]);
   
   
-  const { BehaviorData } = appSelector((state) => state.RecommendData);
-  useEffect(() => {
-    // دالة الإرسال
-    const sendData = async () => {
-      try {
-        await axios.post("http://127.0.0.1:8000/calculate_interest", BehaviorData);
-        console.log("BehaviorData sent successfully");
-      } catch (err) {
-        console.error("Error sending BehaviorData:", err);
-      }
-    };
+const { BehaviorData } = appSelector((state) => state.RecommendData);
 
-    // أول إرسال عند الماونت مباشرة
+useEffect(() => {
+  const isValidData = (data: any) => {
+    if (!data) return false;
+
+    // لو Array
+    if (Array.isArray(data)) {
+      return data.length > 0;
+    }
+
+    // لو Object
+    if (typeof data === "object") {
+      return Object.keys(data).length > 0;
+    }
+
+    return false;
+  };
+
+  const sendData = async () => {
+    // ⛔ ما يرسلش لو الداتا مش صالحة
+    if (!isValidData(BehaviorData)) return;
+
+    try {
+      await axios.post(
+        import.meta.env.VITE_ai_endpoint,
+        BehaviorData
+      );
+    } catch (err) {
+      console.error("Error sending BehaviorData:", err);
+    }
+  };
+
+  // إرسال أول مرة
+  sendData();
+
+  // كل دقيقة
+  const interval = setInterval(() => {
     sendData();
+  }, 60000);
 
-    // كل 60 ثانية
-    const interval = setInterval(() => {
-      sendData();
-    }, 60000); // 60000 ms = 1 دقيقة
+  return () => clearInterval(interval);
+}, [BehaviorData]);
 
-    // تنظيف عند إزالة المكون
-    return () => clearInterval(interval);
-  }, [BehaviorData]); // لو تغير BehaviorData رح يعيد التشغيل
 }

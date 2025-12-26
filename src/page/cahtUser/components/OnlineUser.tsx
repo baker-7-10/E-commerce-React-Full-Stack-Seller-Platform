@@ -1,6 +1,6 @@
 
 const OnlineUser = ({userNum}:{
-  userNum:number
+  userNum : number
 }) => {
   return (
     <div className="bg-blue-100 text-blue-800 text-sm font-medium py-2 px-4 flex justify-center items-center shadow-md">

@@ -39,8 +39,7 @@ function MessageNotifications() {
 
   return (
     <div>
-  <OnlineUser userNum={onlineUsers.length}/>
-<Link to="/WebRTC"><FaPhoneAlt /></Link>
+  {/* <OnlineUser userNum={onlineUsers.length}/> */}
 
       {isLoading && onlineUsers.length > 0 ? (
         <Spinner />
