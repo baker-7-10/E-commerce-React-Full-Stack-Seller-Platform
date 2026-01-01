@@ -55,7 +55,7 @@ const HomepageReducer = createSlice({
       );
     },
 getRecommendationss(state, action) {
-  const data = action.payload.data[0];
+  const data = action.payload[0];
 
   // ترتيب الكاتيجوريز حسب السكور
   const sortedCategories = Object.entries(data)

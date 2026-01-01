@@ -1,11 +1,14 @@
-export const getRecommendations = async (userId : string ) => {
-  const res = await fetch(
-    `http://localhost:8000/ML?user_id=${userId}`
-  );
+import supabase from "./supabase";
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch recommendations");
+export const getRecommendations = async (userId: string) => {
+  const { data, error } = await supabase
+    .from("recommendation_category")
+    .select("*")
+    .eq("user_id", userId);
+
+  if (error) {
+    throw new Error(error.message);
   }
 
-  return res.json();
+  return data;
 };
