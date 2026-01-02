@@ -76,7 +76,6 @@ export default function useInitApp() {
   
     useEffect(() => {
     if (recommendations) { 
-      console.log(recommendations);
         
       dispatch(getRecommendationss(recommendations));
     }

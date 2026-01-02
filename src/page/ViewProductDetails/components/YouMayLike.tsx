@@ -13,10 +13,11 @@ import BoxBroduct from '@/components/boxProduct/BoxPoduct';
 const YouMayLike = ({ ProductDetails }: { ProductDetails: MyProductType }) => {
   const { appSelector } = useRedux();
   const { Data } = appSelector((state) => state.product);
-  const { userRecommendations} = appSelector((state) => state.product);
+  const { userRecommendations  , randomProduct} = appSelector((state) => state.product);
   const dataMayLike = Data.filter(
     (arr) => arr.category === ProductDetails.category
   );
+  const data = userRecommendations && randomProduct;
   return (
     <div className=" w-[100%] relative">
       <h1 className="text-3xl sm:text-4xl font-bold text-red-600 mx-3 sm:mx-5 text-center drop-shadow-md my-10 ">
@@ -48,7 +49,7 @@ const YouMayLike = ({ ProductDetails }: { ProductDetails: MyProductType }) => {
             },
           }}
         >
-          {userRecommendations?.map((product) => (
+          {data?.map((product) => (
             <SwiperSlide key={product.id}>
               <BoxBroduct product={product} idItem={product.id} />
             </SwiperSlide>

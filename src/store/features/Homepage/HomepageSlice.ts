@@ -55,9 +55,10 @@ const HomepageReducer = createSlice({
       );
     },
 getRecommendationss(state, action) {
+  if (!action.payload || action.payload.length === 0) return;
+  
   const data = action.payload[0];
 
-  // ترتيب الكاتيجوريز حسب السكور
   const sortedCategories = Object.entries(data)
     .filter(([key]) =>
       !["id", "user_id", "created_at"].includes(key)

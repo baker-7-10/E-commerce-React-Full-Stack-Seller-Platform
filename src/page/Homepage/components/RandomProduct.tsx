@@ -44,8 +44,9 @@ const Recommendations = () => {
     }
   };
 
-  const finalData: MyProductType[] = userRecommendations || randomProduct;
+  const finalData: MyProductType[] = userRecommendations &&  randomProduct;
 
+console.log( randomProduct);
 
 
   const nextSlide = () => {
