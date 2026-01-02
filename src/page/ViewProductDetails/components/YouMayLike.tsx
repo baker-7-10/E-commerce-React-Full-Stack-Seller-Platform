@@ -17,7 +17,8 @@ const YouMayLike = ({ ProductDetails }: { ProductDetails: MyProductType }) => {
   const dataMayLike = Data.filter(
     (arr) => arr.category === ProductDetails.category
   );
-  const data = userRecommendations && randomProduct;
+  const data = !userRecommendations ? randomProduct : userRecommendations;
+  
   return (
     <div className=" w-[100%] relative">
       <h1 className="text-3xl sm:text-4xl font-bold text-red-600 mx-3 sm:mx-5 text-center drop-shadow-md my-10 ">
