@@ -36,6 +36,11 @@ function MessageNotifications() {
     );
     navigate(`/ChatPage`);
   };
+console.log(ReceiverChat , 'receiver chat');
+
+    const sender = ReceiverChat?.filter((chat) => {
+      chat.sender_id !== userId
+    });
 
   return (
     <div>
@@ -43,9 +48,9 @@ function MessageNotifications() {
 
       {isLoading && onlineUsers.length > 0 ? (
         <Spinner />
-      ) : ReceiverChat?.length > 0 ? (
+      ) : sender?.length > 0 ? (
         <div className="flex gap-4 justify-center flex-wrap cursor-pointer bg-gray-100 p-5 rounded-lg shadow-lg">
-          {ReceiverChat?.map((e) => (
+          {sender?.map((e) => (
             <ReceiverUser
               key={e.sender_id}
               handleNavigate={handleNavigate}
@@ -56,7 +61,7 @@ function MessageNotifications() {
           ))}
         </div>
       ) : (
-        <div className="text-center text-gray-500">no chats</div>
+        <div className="text-center text-gray-500">No User</div>
       )}
     </div>
   );
