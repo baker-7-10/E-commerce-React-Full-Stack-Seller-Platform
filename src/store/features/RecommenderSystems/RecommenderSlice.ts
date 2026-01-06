@@ -1,7 +1,6 @@
 import { MyProductType } from '@/types/product.type';
 import { createSlice } from '@reduxjs/toolkit';
 
-// نوع مخصص لبيانات الBehavior
 type BehaviorType = {
   user_id: string;
   category: string;
@@ -24,7 +23,7 @@ const initialState: {
     productId: string;
     Category: string;
   }[];
-  BehaviorData: BehaviorType | {}; // 👈 إضافة behavior data للنوع
+  BehaviorData: BehaviorType | {};
 } = {
   Data: [],
   recommendProduct: [],
@@ -32,7 +31,7 @@ const initialState: {
   productlike: [],
   SearchWorld: [],
   dataAfterSort: [],
-  BehaviorData: {}, // 👈 الآن أصبح قانوني
+  BehaviorData: {}, 
 };
 
 const RecommenderSlice = createSlice({
@@ -44,17 +43,14 @@ const RecommenderSlice = createSlice({
     },
 
     getDataToRecommend(state, action) {
-      // أضف العنصر الجديد للقائمة
       state.recommendProduct.push(action.payload);
 
       if (state.recommendProduct.length === 0) return;
 
-      // إيجاد العنصر الأعلى وقتاً
       const maxItem = state.recommendProduct.reduce((max, curr) => {
         return curr.timeSpent > (max?.timeSpent ?? -Infinity) ? curr : max;
       }, null);
 
-      // إعداد BehaviorData لإرساله للفرونت
       if (maxItem) {
         state.BehaviorData = {
           user_id: state.userId,
