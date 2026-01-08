@@ -17,7 +17,7 @@ const YouMayLike = ({ ProductDetails }: { ProductDetails: MyProductType }) => {
   const dataMayLike = Data.filter(
     (arr) => arr.category === ProductDetails.category
   );
-  const data = !userRecommendations ? randomProduct : userRecommendations;
+  const finalData: MyProductType[] = userRecommendations.length > 0 ? userRecommendations : randomProduct;
   
   return (
     <div className=" w-[100%] relative">
@@ -50,7 +50,7 @@ const YouMayLike = ({ ProductDetails }: { ProductDetails: MyProductType }) => {
             },
           }}
         >
-          {data?.map((product) => (
+          {finalData?.map((product) => (
             <SwiperSlide key={product.id}>
               <BoxBroduct product={product} idItem={product.id} />
             </SwiperSlide>

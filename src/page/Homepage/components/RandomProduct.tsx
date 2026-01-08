@@ -26,6 +26,7 @@ const Recommendations = () => {
   const { randomProduct  , userRecommendations} = appSelector((state) => state.product);
     const [currentSlide, setCurrentSlide] = useState(0);
 
+console.log(randomProduct);
 
 
   // recommendations.data.Electronics
@@ -44,7 +45,7 @@ const Recommendations = () => {
     }
   };
 
-  const finalData: MyProductType[] = !userRecommendations ? randomProduct : userRecommendations;
+  const finalData: MyProductType[] = userRecommendations.length > 0 ? userRecommendations : randomProduct;
 
 
   const nextSlide = () => {
