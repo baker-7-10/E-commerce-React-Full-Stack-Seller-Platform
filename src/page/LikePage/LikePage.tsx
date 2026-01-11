@@ -52,13 +52,13 @@ if(isLoading) return <div>loading</div>
         /* Enhanced Empty State */
         <div className="flex min-h-[60vh] flex-col items-center justify-center rounded-2xl border border-slate-800 bg-slate-900/50 px-4 text-center backdrop-blur-sm">
           <div className="mb-6 rounded-full bg-slate-800 p-6 ring-1 ring-slate-700">
-            <FaHeart size={48} className="text-slate-500" />
+            <FaHeart size={48} className="" />
           </div>
           
           <h2 className="mb-2 text-2xl font-bold text-slate-200">
             No favorites yet
           </h2>
-          <p className="mb-8 max-w-md text-slate-400">
+          <p className="mb-8 max-w-md">
             You haven't liked any products yet. Browse our collection and heart the things you love!
           </p>
 
