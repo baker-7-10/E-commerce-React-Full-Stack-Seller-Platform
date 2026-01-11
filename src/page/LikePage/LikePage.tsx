@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { selectProductFavorite } from '@/backend/apiProductFavorite';
 import usefetchFavorites from '@/hooks/usefetchFavorites';
 import BoxBroduct from '@/components/boxProduct/BoxPoduct';
+import { Heart, ArrowLeft, ShoppingBag } from 'lucide-react';
+
 function LikePage() {
   const { user } = useUser();
   if (!user) return;
