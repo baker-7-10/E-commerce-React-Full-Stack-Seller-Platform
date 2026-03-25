@@ -9,8 +9,8 @@ import useProductData from '@/hooks/useUpdateData';
 import { insertNewProduct } from '@/backend/apiDataOfProduct';
 
 import { useNavigate } from 'react-router-dom';
-import Alert from '@/components/Alert/Alert';
-import Input from '@/components/Input/Input';
+import Alert from '@/ui/Alert/Alert';
+import Input from '@/ui/Input/Input';
 
 function AddNewProduct() {
   const [sortBy, setSortBy] = useState('From the latest');

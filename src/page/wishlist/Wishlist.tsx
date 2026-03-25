@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import useRedux from '@/hooks/useRedux';
 import { gitCartItem } from '@/store/features/Cart/CartSlice';
 import { deleteAllFromWishList } from '@/store/features/Wishlist/wishlistSlice';
-import BoxBroduct from '@/components/boxProduct/BoxPoduct';
-import ShowProduct from '@/components/ShowProduct';
+import BoxBroduct from '@/ui/boxProduct/BoxPoduct';
+import ShowProduct from '@/ui/ShowProduct';
 
 
 function Wishlist() {

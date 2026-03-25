@@ -9,7 +9,7 @@ import useReadChats from '@/hooks/useReadChats';
 import useInsertMassage from '@/hooks/UseInsertMassage';
 import { getDataChats, showChatUser } from '@/store/features/User/userSlice';
 import ChatMassage from './components/ChatMassage';
-import Spinner from '@/components/Spinner';
+import Spinner from '@/ui/Spinner';
 
 function ChatPage() {
   const uniqueId = uuidv4();

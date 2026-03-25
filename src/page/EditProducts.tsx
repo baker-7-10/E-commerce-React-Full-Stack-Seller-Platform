@@ -6,7 +6,7 @@ import { MyProductType } from '@/types/product.type';
 import useUpdateProduct from '@/hooks/useUpdateProduct';
 import useRedux from '@/hooks/useRedux';
 import { useNavigate } from 'react-router-dom';
-import Input from '@/components/Input/Input';
+import Input from '@/ui/Input/Input';
 
 const Gg = () => {
   const [sortBy, setSortBy] = useState<string>('From the latest');

@@ -3,8 +3,8 @@ import 'swiper/css';
 import Time from './Time';
 import { FreeMode, Pagination } from 'swiper/modules';
 import useRedux from '@/hooks/useRedux';
-import BoxBroduct from '@/components/boxProduct/BoxPoduct';
-import ShowProduct from '@/components/ShowProduct';
+import BoxBroduct from '@/ui/boxProduct/BoxPoduct';
+import ShowProduct from '@/ui/ShowProduct';
 
 
 function FlachSales() {

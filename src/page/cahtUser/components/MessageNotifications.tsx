@@ -5,7 +5,7 @@ import useUser from '@/hooks/useUser';
 import usePublicUser from '@/hooks/usePublicUser';
 import { useOnlineUser } from '@/hooks';
 import { showChatUser } from '@/store/features/User/userSlice';
-import Spinner from '@/components/Spinner';
+import Spinner from '@/ui/Spinner';
 
 function MessageNotifications() {
   const navigate = useNavigate();

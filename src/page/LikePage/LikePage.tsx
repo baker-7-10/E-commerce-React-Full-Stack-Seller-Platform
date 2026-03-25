@@ -4,7 +4,7 @@ import useUser from '../../hooks/useUser';
 import { useEffect, useState } from 'react';
 import { selectProductFavorite } from '@/backend/apiProductFavorite';
 import usefetchFavorites from '@/hooks/usefetchFavorites';
-import BoxBroduct from '@/components/boxProduct/BoxPoduct';
+import BoxBroduct from '@/ui/boxProduct/BoxPoduct';
 import { FaArrowLeft, FaHeart } from 'react-icons/fa';
 
 function LikePage() {

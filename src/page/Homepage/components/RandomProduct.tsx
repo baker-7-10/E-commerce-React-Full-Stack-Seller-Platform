@@ -10,7 +10,7 @@ import '@/../index.css';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import useRedux from '@/hooks/useRedux';
 import { MyProductType } from '@/types/product.type';
-import Spinner from '@/components/Spinner';
+import Spinner from '@/ui/Spinner';
 import { useRecommendations } from '@/hooks/use-ecommendations';
 import useUser from '@/hooks/useUser';
 import { IoSparkles } from 'react-icons/io5';

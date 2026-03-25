@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
-import Container from '@/components/Container';
+import Container from '@/ui/Container';
 import OnlineUser from '@/page/cahtUser/components/OnlineUser';
 import { useOnlineUser } from '@/hooks';
 

@@ -1,4 +1,4 @@
-import BoxBroduct from '@/components/boxProduct/BoxPoduct';
+import BoxBroduct from '@/ui/boxProduct/BoxPoduct';
 import useRedux from '../../hooks/useRedux';
 import { useParams } from 'react-router-dom';
 

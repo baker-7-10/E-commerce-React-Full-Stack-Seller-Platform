@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import SignUp from '@/page/auth/SignUp';
 import Login from '@/page/auth/Login';
 import useInitApp from '@/hooks/useInitApp';
-import Loading from './components/Loading';
+import Loading from './ui/Loading';
 import ProtectedRoutes from './AppLayout/ProtectedRoutes';
 
 function App() {

@@ -49,7 +49,7 @@ import AddNewProduct from '@/page/AddNewProduct';
 import ChatPage from '@/page/cahtUser/ChatPage';
 import Commentpage from '@/page/Comment/Commentpage';
 import EditProducts from '@/page/EditProducts';
-import Error from '@/components/Error/Error';
+import Error from '@/ui/Error/Error';
 
 const stripeUrl = 'pk_test_51QPYMAKxnNgqIQklhBT5FTH7UU1rPPpPP78wG0n7dsGfze107LYUk1WhLbMs5mzZj6DPfYOpRkLQD88UvgZdbD6P00dGYGvcBE';
 const stripePromise: Promise<Stripe | null> = loadStripe(stripeUrl);

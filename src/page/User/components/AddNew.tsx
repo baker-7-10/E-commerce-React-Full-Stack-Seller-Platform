@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { MyProductType } from "@/types/product.type";
 import useRedux from "@/hooks/useRedux";
 import useDeleteProduct from "@/hooks/useDeleteProduct";
-import Spinner from "@/components/Spinner";
+import Spinner from "@/ui/Spinner";
 import { setProductToEdit } from "@/store/features/User/userSlice";
 import { FaEdit, FaEye, FaHeart, FaTrash } from "react-icons/fa";
 

@@ -1,14 +1,14 @@
-import RandomProduct from './components/RandomProduct';
-import Sidebar from './components/Sidebar';
-import FlachSales from './components/FlachSales';
-import CategorySales from './components/CategorySales';
-import BestSellingProducts from './components/BestSellingProducts';
-import MusicBox from './components/MusicBox';
-import ExploreProducts from './components/ExploreProducts';
-import Information from './components/Information';
+import RandomProduct from './ui/RandomProduct';
+import Sidebar from './ui/Sidebar';
+import FlachSales from './ui/FlachSales';
+import CategorySales from './ui/CategorySales';
+import BestSellingProducts from './ui/BestSellingProducts';
+import MusicBox from './ui/MusicBox';
+import ExploreProducts from './ui/ExploreProducts';
+import Information from './ui/Information';
 import { Link, NavLink } from 'react-router-dom';
-import SearchBar from './components/SearchBar';
-import ButtonLink from '@/components/Link';
+import SearchBar from './ui/SearchBar';
+import ButtonLink from '@/ui/Link';
 
 // import { useOnlineUser } from '@/hooks/useOnlineUser';
 function Homepage() {

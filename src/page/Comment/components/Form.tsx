@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { CommentType } from '@/types/comment.type';
 import { insertNewComment } from '@/backend/apiComments';
-import Input from '@/components/Input/Input';
+import Input from '@/ui/Input/Input';
 
 function Form({ setShowForm }: { setShowForm: (e: boolean) => void }) {
   interface FormData {

@@ -4,8 +4,8 @@ import { UserType } from '@/types/user.type';
 import useUser from '@/hooks/useUser';
 
 import useUpdateUser from '@/hooks/useUpdateUser';
-import Spinner from '@/components/Spinner';
-import Input from '@/components/Input/Input';
+import Spinner from '@/ui/Spinner';
+import Input from '@/ui/Input/Input';
 type FormData = {
   name: string;
   image: string;

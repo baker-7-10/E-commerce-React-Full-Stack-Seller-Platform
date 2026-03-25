@@ -5,7 +5,7 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import Image from '@/assets/Side Image.png';
 import useUser from '@/hooks/useUser';
 import { UseLogin } from '@/hooks';
-import Input from '@/components/Input/Input';
+import Input from '@/ui/Input/Input';
 
 function Login() {
   const {

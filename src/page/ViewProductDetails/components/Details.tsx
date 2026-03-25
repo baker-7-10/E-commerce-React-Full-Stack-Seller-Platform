@@ -10,7 +10,7 @@ import { UseAddToFavorite, UseCartActions, UseRedux, UseUser, UseWishlistAndCart
 import usefetchFavorites from '@/hooks/usefetchFavorites';
 import { gitCartItem } from '@/store/features/Cart/CartSlice';
 import { showChatUser } from '@/store/features/User/userSlice';
-import Stars from '@/components/Stars';
+import Stars from '@/ui/Stars';
 
 const Details = ({
   ProductDetails,

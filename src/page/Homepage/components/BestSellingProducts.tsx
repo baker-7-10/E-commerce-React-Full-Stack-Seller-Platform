@@ -1,6 +1,6 @@
 
-import BoxBroduct from '@/components/boxProduct/BoxPoduct';
-import ShowProduct from '@/components/ShowProduct';
+import BoxBroduct from '@/ui/boxProduct/BoxPoduct';
+import ShowProduct from '@/ui/ShowProduct';
 import useRedux from '@/hooks/useRedux';
 
 function BestSellingProducts() {

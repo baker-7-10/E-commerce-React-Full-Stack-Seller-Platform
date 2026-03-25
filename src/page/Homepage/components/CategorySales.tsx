@@ -12,7 +12,7 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import ShowProduct from '@/components/ShowProduct';
+import ShowProduct from '@/ui/ShowProduct';
 
 
 function CategorySales() {

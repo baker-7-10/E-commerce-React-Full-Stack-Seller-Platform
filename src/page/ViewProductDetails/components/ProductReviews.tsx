@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { CommentsOfProductType } from '@/types/CommentsOfProduct.type';
 import { UseInsertNewReview, UseUser } from '@/hooks';
-import Input from '@/components/Input/Input';
+import Input from '@/ui/Input/Input';
 import Replies from './Replies';
 
 function ProductReviews({

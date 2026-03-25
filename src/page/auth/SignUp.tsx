@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import Image from '@/assets/Side Image.png';
 import { UseSignup } from '@/hooks';
-import Input from '@/components/Input/Input';
+import Input from '@/ui/Input/Input';
 
 
 function SignUp() {

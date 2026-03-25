@@ -6,8 +6,8 @@ import { FreeMode, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { MyProductType } from '@/types/product.type';
 import useRedux from '@/hooks/useRedux';
-import ShowProduct from '@/components/ShowProduct';
-import BoxBroduct from '@/components/boxProduct/BoxPoduct';
+import ShowProduct from '@/ui/ShowProduct';
+import BoxBroduct from '@/ui/boxProduct/BoxPoduct';
 
 
 const YouMayLike = ({ ProductDetails }: { ProductDetails: MyProductType }) => {
